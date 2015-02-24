@@ -9,7 +9,6 @@
 
 namespace umi\form\element;
 
-use umi\form\exception\InvalidArgumentException;
 use umi\form\FormEntityView;
 
 /**
@@ -68,18 +67,15 @@ abstract class BaseChoiceElement extends BaseFormElement implements IChoiceFormE
 
     /**
      * {@inheritdoc}
-     * @throws InvalidArgumentException если значение не в списке.
      */
     public function setValue($value)
     {
-        $values = (array) $value;
+        $values = (array)$value;
 
         foreach ($values as $item) {
             $item = $this->filter($item);
             if (!isset($this->getChoices()[$item])) {
-                throw new InvalidArgumentException(
-                    sprintf('Value "%s" is not in available values list.', $value)
-                );
+                return $this;
             }
         }
 
