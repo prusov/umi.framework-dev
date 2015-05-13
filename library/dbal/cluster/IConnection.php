@@ -24,29 +24,25 @@ use umi\dbal\exception\RuntimeException;
  */
 interface IConnection
 {
-
     /**
      * Тип события, которое происходит перед подготовкой запроса.
      * @param string $sql шаблон запроса
      * @param IQueryBuilder|null $queryBuilder билдер запроса
      */
-    const EVENT_BEFORE_PREPARE_QUERY = 'umi:db:eventBeforePrepareQuery';
+    const EVENT_BEFORE_PREPARE_QUERY = 'db:eventBeforePrepareQuery';
     /**
      * Тип события, которое происходит после выполнения запроса.
      * @param PDOStatement $preparedStatement подготовленный запрос
      * @param IQueryBuilder|null $queryBuilder билдер запроса
      */
-    const EVENT_AFTER_EXECUTE_QUERY = 'umi:db:eventAfterExecuteQuery';
+    const EVENT_AFTER_EXECUTE_QUERY = 'db:eventAfterExecuteQuery';
 
     /**
      * Подготавливает запрос на выборку данных,
-     * определяет список столбцов для выборки. <br />
-     * Список столбцов передается в параметрах метода.<br />
-     * Если столбцы не переданы, будет сформирован запрос, содержащий все столбцы (SELECT *)<br />
-     *
+     * определяет список столбцов для выборки.
+     * Список столбцов передается в параметрах метода.
+     * Если столбцы не переданы, будет сформирован запрос, содержащий все столбцы (SELECT *).
      * @param string|array $columns
-     *
-     * @internal param string $columnName список имен столбцов
      * @return ISelectBuilder
      */
     public function select($columns = []);
@@ -76,9 +72,6 @@ interface IConnection
 
     /**
      * Выполняет прямой запрос на выборку данных.
-     * Можно использовать только для тестов, для реализации драйверов БД,
-     * для быстрых операций с БД не в "коробочных" целях
-     * @internal
      * @param string $sql sql-запрос
      * @param array $params массив параметров для подготовленных запросов
      * @throws RuntimeException если в процессе выполнения запроса произошли ошибки
@@ -87,11 +80,8 @@ interface IConnection
     public function selectInternal($sql, array $params = []);
 
     /**
-     * Выполняет прямой запрос на модификацию данных
-     * @internal
-     *
+     * Выполняет прямой запрос на модификацию данных.
      * @param string $sql sql-запрос
-     *
      * @return int количество затронутых запросом строк
      */
     public function modifyInternal($sql);
