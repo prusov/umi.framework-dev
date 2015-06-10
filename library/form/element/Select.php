@@ -45,8 +45,14 @@ class Select extends BaseChoiceElement
             $selected = (array) $this->getValue();
             $view->choices = [];
 
-            foreach ($this->getChoices() as $value => $label) {
-                $attributes = ['value' => $value];
+            foreach ($this->getChoices() as $value => $attributes) {
+                if (!is_array($attributes)) {
+                    $attributes = ['label' => $attributes];
+                } elseif (!isset($attributes['label'])) {
+                    $attributes['label'] = $value;
+                }
+
+                $attributes['value'] = $value;
 
                 if (in_array($value, $selected)) {
                     $attributes += [
@@ -55,7 +61,7 @@ class Select extends BaseChoiceElement
                 }
 
                 $view->choices[] = [
-                    'label' => $this->translate($label),
+                    'label' => $this->translate($attributes['label']),
                     'value' => $value,
                     'attributes' => new EntityAttributesView($attributes)
                 ];
