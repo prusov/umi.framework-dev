@@ -9,6 +9,7 @@
 
 namespace umi\i18n;
 
+use umi\i18n\exception\RequiredDependencyException;
 use umi\i18n\translator\ITranslator;
 
 /**
@@ -55,6 +56,22 @@ trait TLocalizable
         }
 
         return strtr($message, $replace);
+    }
+
+    /**
+     * Возвращает транслятор.
+     * @return ITranslator
+     */
+    protected function getTranslator()
+    {
+        if (!$this->traitTranslator) {
+            throw new RequiredDependencyException(sprintf(
+                'Translator is not injected in class "%s".',
+                get_class($this)
+            ));
+        }
+
+        return $this->traitTranslator;
     }
 
     /**
