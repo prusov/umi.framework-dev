@@ -99,7 +99,11 @@ class FieldCondition implements IFieldCondition
     public function in(array $value)
     {
         $this->operator = self::OPERATOR_IN;
-        $this->expression = $value;
+
+        $this->expression = [];
+        foreach ($value as $nextValue) {
+            $this->expression[] = $this->prepareValue($nextValue);
+        }
 
         return $this->selector;
     }
@@ -107,7 +111,11 @@ class FieldCondition implements IFieldCondition
     public function notIn(array $value)
     {
         $this->operator = self::OPERATOR_NOT_IN;
-        $this->expression = $value;
+
+        $this->expression = [];
+        foreach ($value as $nextValue) {
+            $this->expression[] = $this->prepareValue($nextValue);
+        }
 
         return $this->selector;
     }
@@ -122,7 +130,7 @@ class FieldCondition implements IFieldCondition
         }
 
         $this->operator = self::OPERATOR_NOTEQUALS;
-        $this->expression = $value;
+        $this->expression = $this->prepareValue($value);
 
         return $this->selector;
     }
