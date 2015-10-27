@@ -96,6 +96,18 @@ class HierarchicObject extends Object implements IHierarchicObject
     /**
      * {@inheritdoc}
      */
+    public function setSlug($slug)
+    {
+        if ($this->getProperty(self::FIELD_SLUG)->getValue() != $slug) {
+            $this->getCollection()->changeSlug($this, $slug);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         parent::reset();

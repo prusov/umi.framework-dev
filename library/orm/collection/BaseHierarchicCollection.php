@@ -315,15 +315,6 @@ abstract class BaseHierarchicCollection extends BaseCollection implements IHiera
      */
     public function changeSlug(IHierarchicObject $object, $slug)
     {
-        if (!$this
-            ->getObjectPersister()
-            ->getIsPersisted()
-        ) {
-            throw new RuntimeException($this->translate(
-                'Cannot change slug for object. Not all objects are persisted. Commit transaction first.'
-            ));
-        }
-
         $branch = $object->getParent();
 
         $baseUri = $branch ? $branch->getURI() . '/' : '//';

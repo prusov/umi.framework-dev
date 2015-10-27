@@ -81,4 +81,11 @@ interface IHierarchicObject extends IObject
      * @return string
      */
     public function getSlug();
+
+    /**
+     * Изменяет последнюю часть ЧПУ, пересчитывает URL для всех дочерних элементов.
+     * @param string $slug
+     * @return $this
+     */
+    public function setSlug($slug);
 }
