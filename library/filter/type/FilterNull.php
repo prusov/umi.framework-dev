@@ -12,14 +12,15 @@ namespace umi\filter\type;
 use umi\filter\IFilter;
 
 /**
- * Фильтр преобразует строку к целочисленому значению.
- * Преобразует значение к целочисленому.
+ * Фильтр NULL.
+ * Преобразует значение к NULL.
  */
-class Int implements IFilter
+class FilterNull implements IFilter
 {
 
     /**
      * @var array $options опции фильтра
+     * @example [optional_values] = ['null']
      */
     protected $options = [];
 
@@ -46,8 +47,11 @@ class Int implements IFilter
      */
     public function filter($var)
     {
-        $base = isset($this->options['base']) ? $this->options['base'] : 10;
-
-        return intval($var, $base);
+        $optional = isset($this->options['optional_values']) ? $this->options['optional_values'] : [];
+        if (array_search($var, $optional) !== false) {
+            return null;
+        } else {
+            return $var ? : null;
+        }
     }
 }

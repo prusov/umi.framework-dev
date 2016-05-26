@@ -10,7 +10,7 @@
 namespace utest\filter\unit\type;
 
 use umi\filter\IFilter;
-use umi\filter\type\Boolean;
+use umi\filter\type\FilterBoolean;
 use utest\filter\FilterTestCase;
 
 /**
@@ -26,7 +26,7 @@ class BooleanFilterTests extends FilterTestCase
 
     public function setUpFixtures()
     {
-        $this->filter = new Boolean();
+        $this->filter = new FilterBoolean();
     }
 
     public function testFilterBaseUsage()
@@ -43,7 +43,7 @@ class BooleanFilterTests extends FilterTestCase
 
     public function testFilterAdvancedUsage()
     {
-        $filter = new Boolean([
+        $filter = new FilterBoolean([
             'optional_values' => [
                 'yes' => 1,
                 'no'  => 0

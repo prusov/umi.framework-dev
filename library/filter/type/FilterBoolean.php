@@ -12,15 +12,15 @@ namespace umi\filter\type;
 use umi\filter\IFilter;
 
 /**
- * Фильтр NULL.
- * Преобразует значение к NULL.
+ * Фильтр преобразует строку к логическому типу.
+ * Преобразует значение к boolean.
  */
-class Null implements IFilter
+class FilterBoolean implements IFilter
 {
 
     /**
      * @var array $options опции фильтра
-     * @example [optional_values] = ['null']
+     * @example [optional_values] = ['yes' => true, 'no' => false]
      */
     protected $options = [];
 
@@ -47,11 +47,10 @@ class Null implements IFilter
      */
     public function filter($var)
     {
-        $optional = isset($this->options['optional_values']) ? $this->options['optional_values'] : [];
-        if (array_search($var, $optional) !== false) {
-            return null;
+        if (isset($this->options['optional_values'][$var])) {
+            return (bool) $this->options['optional_values'][$var];
         } else {
-            return $var ? : null;
+            return (bool) $var;
         }
     }
 }

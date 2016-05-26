@@ -10,7 +10,7 @@
 namespace utest\filter\unit\type;
 
 use umi\filter\IFilter;
-use umi\filter\type\Int;
+use umi\filter\type\FilterInt;
 use utest\filter\FilterTestCase;
 
 /**
@@ -25,7 +25,7 @@ class IntFilterTests extends FilterTestCase
 
     public function setUpFixtures()
     {
-        $this->filter = new Int();
+        $this->filter = new FilterInt();
     }
 
     public function testFilterBaseUsage()
@@ -44,7 +44,7 @@ class IntFilterTests extends FilterTestCase
 
     public function testFilterAdvancedUsage()
     {
-        $filter = new Int(['base' => 16]);
+        $filter = new FilterInt(['base' => 16]);
         $this->assertEquals(
             255,
             $filter->filter("FF"),

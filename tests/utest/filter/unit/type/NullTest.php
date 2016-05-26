@@ -10,7 +10,7 @@
 namespace utest\filter\unit\type;
 
 use umi\filter\IFilter;
-use umi\filter\type\Null;
+use umi\filter\type\FilterNull;
 use utest\filter\FilterTestCase;
 
 /**
@@ -25,7 +25,7 @@ class NullFilterTests extends FilterTestCase
 
     public function setUpFixtures()
     {
-        $this->filter = new Null();
+        $this->filter = new FilterNull();
     }
 
     public function testFilterBaseUsage()
@@ -38,7 +38,7 @@ class NullFilterTests extends FilterTestCase
 
     public function testFilterAdvancedUsage()
     {
-        $filter = new Null(['optional_values' => ['null', 'false']]);
+        $filter = new FilterNull(['optional_values' => ['null', 'false']]);
         $this->assertEquals('string', $filter->filter('string'), "Ожидается, что значение не будет изменено");
 
         $this->assertNull($filter->filter('false'), "Ожидается, что отфильтрованное значение будет null");

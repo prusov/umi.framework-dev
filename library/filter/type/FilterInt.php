@@ -12,15 +12,14 @@ namespace umi\filter\type;
 use umi\filter\IFilter;
 
 /**
- * Фильтр преобразует строку к логическому типу.
- * Преобразует значение к boolean.
+ * Фильтр преобразует строку к целочисленому значению.
+ * Преобразует значение к целочисленому.
  */
-class Boolean implements IFilter
+class FilterInt implements IFilter
 {
 
     /**
      * @var array $options опции фильтра
-     * @example [optional_values] = ['yes' => true, 'no' => false]
      */
     protected $options = [];
 
@@ -47,10 +46,8 @@ class Boolean implements IFilter
      */
     public function filter($var)
     {
-        if (isset($this->options['optional_values'][$var])) {
-            return (bool) $this->options['optional_values'][$var];
-        } else {
-            return (bool) $var;
-        }
+        $base = isset($this->options['base']) ? $this->options['base'] : 10;
+
+        return intval($var, $base);
     }
 }

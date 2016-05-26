@@ -12,8 +12,18 @@ namespace umi\filter\toolbox\factory;
 use umi\filter\exception\OutOfBoundsException;
 use umi\filter\IFilter;
 use umi\filter\IFilterFactory;
+use umi\filter\type\FilterBoolean;
+use umi\filter\type\FilterInt;
+use umi\filter\type\FilterNull;
+use umi\filter\type\HtmlEntities;
+use umi\filter\type\StringToLower;
+use umi\filter\type\StringToUpper;
+use umi\filter\type\StringTrim;
+use umi\filter\type\StripNewLines;
+use umi\filter\type\StripTags;
 use umi\toolkit\factory\IFactory;
 use umi\toolkit\factory\TFactory;
+use umi\validation\type\Regexp;
 
 /**
  * Фабрика фильтров.
@@ -37,16 +47,16 @@ class FilterFactory implements IFilterFactory, IFactory
      * @var array $types поддерживаемые фильтры
      */
     public $types = array(
-        self::TYPE_BOOLEAN         => 'umi\filter\type\Boolean',
-        self::TYPE_HTML_ENTITIES   => 'umi\filter\type\HtmlEntities',
-        self::TYPE_INT             => 'umi\filter\type\Int',
-        self::TYPE_NULL            => 'umi\filter\type\Null',
-        self::TYPE_REGEXP          => 'umi\filter\type\Regexp',
-        self::TYPE_STRING_TO_LOWER => 'umi\filter\type\StringToLower',
-        self::TYPE_STRING_TO_UPPER => 'umi\filter\type\StringToUpper',
-        self::TYPE_STRING_TRIM     => 'umi\filter\type\StringTrim',
-        self::TYPE_STRIP_NEW_LINES => 'umi\filter\type\StripNewLines',
-        self::TYPE_STRIP_TAGS      => 'umi\filter\type\StripTags',
+        self::TYPE_BOOLEAN         => FilterBoolean::class,
+        self::TYPE_HTML_ENTITIES   => HtmlEntities::class,
+        self::TYPE_INT             => FilterInt::class,
+        self::TYPE_NULL            => FilterNull::class,
+        self::TYPE_REGEXP          => Regexp::class,
+        self::TYPE_STRING_TO_LOWER => StringToLower::class,
+        self::TYPE_STRING_TO_UPPER => StringToUpper::class,
+        self::TYPE_STRING_TRIM     => StringTrim::class,
+        self::TYPE_STRIP_NEW_LINES => StripNewLines::class,
+        self::TYPE_STRIP_TAGS      => StripTags::class,
 
     );
 
